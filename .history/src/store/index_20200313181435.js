@@ -9,6 +9,7 @@ export default new Vuex.Store({
       {
         _id: 0,
         name: "Szeraton",
+        logo:"hotels/sheraton/sheraton_logo.png",
         floors:[
           {
             _id:0,

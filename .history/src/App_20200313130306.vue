@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <h1>wad</h1>
-    <!-- <img alt="Vue logo" :src="hotels.logo"> -->
-    <Hotel />
+  <div id="app">
+    <img alt="Vue logo" src="./assets/logo.png">
+    <Hotels />
   </div>
 </template>
 
@@ -13,11 +12,15 @@ import Hotel from './components/Hotel.vue'
 export default {
   name: 'App',
   components:{
-    Hotel,
+    Hotel
   },
   data(){
     return{
+
     }
+  },
+  components: {
+    Hotels
   }
 }
 </script>

@@ -1,7 +1,12 @@
 <template>
-  <div>
+  <div id="app">
     <h1>wad</h1>
     <!-- <img alt="Vue logo" :src="hotels.logo"> -->
+      <img alt="Vue logo" :src="require(`./assets/${images}`)">
+      <img alt="Vue logo" src="./assets/hotels/sheraton/sheraton_logo.png">
+      <img alt="Vue logo" src="./assets/logo.png">
+    {{ hotels }}
+    {{ images }}
     <Hotel />
   </div>
 </template>
@@ -17,6 +22,12 @@ export default {
   },
   data(){
     return{
+      logo: 'wad.jpg',
+    }
+  },
+  computed:{
+    hotels(){
+      return this.$store.state.hotels[0];
     }
   }
 }

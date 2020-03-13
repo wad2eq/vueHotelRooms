@@ -2,6 +2,7 @@
   <div>
     <h1>wad</h1>
     <!-- <img alt="Vue logo" :src="hotels.logo"> -->
+      <img alt="Vue logo" :src="require(`./assets/${hotels.logo}`)">
     <Hotel />
   </div>
 </template>
@@ -17,6 +18,11 @@ export default {
   },
   data(){
     return{
+    }
+  },
+  computed:{
+    hotels(){
+      return this.$store.state.hotels[0];
     }
   }
 }

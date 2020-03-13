@@ -9,7 +9,7 @@ export default new Vuex.Store({
       {
         _id: 0,
         name: "Szeraton",
-        floors:[
+        pietra:[
           {
             _id:0,
             rooms:[100, 150]

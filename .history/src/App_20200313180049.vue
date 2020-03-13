@@ -1,7 +1,11 @@
 <template>
-  <div>
+  <div id="app">
     <h1>wad</h1>
     <!-- <img alt="Vue logo" :src="hotels.logo"> -->
+      <img alt="Vue logo" src="./assets/hotels/sheraton/sheraton_logo.png">
+      <img alt="Vue logo" src="./assets/logo.png">
+    {{ hotels }}
+    {{ hotels.logo }}
     <Hotel />
   </div>
 </template>
@@ -14,9 +18,17 @@ export default {
   name: 'App',
   components:{
     Hotel,
+
   },
   data(){
     return{
+      img:'assets/hotels/sheraton/sheraton_logo.png',
+      logo: 'wad.jpg'
+    }
+  },
+  computed:{
+    hotels(){
+      return this.$store.state.hotels[0];
     }
   }
 }

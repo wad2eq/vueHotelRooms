@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>wad</h1>
+     <img alt="Vue logo" :src="require(`./assets/${hotels.logo}`)">
     <!-- <img alt="Vue logo" :src="hotels.logo"> -->
     <Hotel />
   </div>
