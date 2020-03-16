@@ -1,6 +1,6 @@
 <template>
   <div clas="container">
-    <h2>floors</h2>
+    <h2>Floor</h2>
     <hr />
     <Rooms :floorId="floorId"/>
   </div>
@@ -18,10 +18,11 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+  },
   computed: {
     floors() {
-      return this.$store.getters.getFloors;
+      return this.$store.getters.getFloors[this.floorId];
     }
   }
 };
