@@ -1,7 +1,6 @@
 <template>
-  <div clas="container">
-    <h2>Floor</h2>
-    <hr />
+  <div class="box-container">
+    <h2 class="title text-center">Floor</h2>
     <Rooms :floorId="floorId"/>
   </div>
 </template>
@@ -29,4 +28,32 @@ export default {
 </script>
 
 <style lang="scss">
+.flors {
+  border: none;
+  background: $color2 !important;
+  color:$gray;
+  border-top: 2px $yellow2 solid;
+  padding:$input-size/2 0 ;
+  &--input {
+    max-width: $input-size;
+    height: $input-size;
+    margin: 0 $input-size/5;
+    color: $yellow2;
+    font-weight: bold;
+    padding: 4px;
+    border:none;
+    border-bottom:1px solid $green2;
+    background: $color1;
+    border-radius: 2px;
+  }
+  &--edit-range {
+    background: none;
+    border: none;
+    max-width: $input-size;
+    max-height: $input-size;
+  }
+  .notValidInput {
+    border-color: $color4;
+  }
+}
 </style>

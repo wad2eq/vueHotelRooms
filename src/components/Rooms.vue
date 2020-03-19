@@ -1,11 +1,11 @@
 <template>
-  <div class="flex-container">
+  <div class="flex-container flex-center padding">
     <div :key="i" v-for="(room, i) in getRooms" class="room card">
       <input :value="room" :class="inputClasses" />
       <span class="room--switcher" @click="removeRoom(room)"></span>
     </div>
     <div class="room card">
-      <input type="text" v-model="addRoomValue" class="inputClasses" @keyup="updateRoom">
+      <input type="text" v-model="addRoomValue" :class="inputClasses" @keyup="updateRoom">
     </div>
   </div>
 </template>
@@ -63,24 +63,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  $room-size:48px;
-  $switcher-size:$room-size/5;
-  $light-greay: hsla(360, 0%, 68%, 1);
+
     .room{
         width: $room-size;
-        height: $room-size{};
+        height: $room-size;
         color: lighten($light-greay, 23);
         position: relative;
         margin:5px;
         border-radius: 2px;
+        display: flex;
       &--number{
-        color:darken($light-greay, 30);
-        font-size: $room-size/3;
-        font-weight: bold;
         width: 100%;
+        margin-top: $input-size/5;
+        align-self: center;
+        font-size: $room-size/3;
+        font-family: $big-header;
+        font-weight: bold;
         border:none;
-        position: absolute;
-        bottom: 2px;
         text-align: center;
       }
       &--switcher{
@@ -94,19 +93,22 @@ export default {
         padding:$switcher-size/2;
         box-sizing: border-box;
         &:hover{
-          color:red;
+          color:$color4;
           cursor: pointer;
+          &:after, &:before{
+            background-color:$red2;
+          }
         }
         &:after, &:before{
+          position: absolute;
           content: '';
           display: block;
-          height:  $switcher-size;
-          position: absolute;
-          top:0;
-          margin: auto;
-          width: 10px;
+          width: $switcher-size;
           height: 2px;
-          background-color:red;
+          margin: auto;
+          left:0;
+          margin: 0;
+          background-color:$red1;
         }
         &:after{
           transform: rotate(45deg);

@@ -1,0 +1,38 @@
+$font:'Roboto', sans-serif;
+$big-header:'Sen', sans-serif;
+$header:'Roboto Slab', serif;
+//Colors
+$color1: hsla(214%, 35%, 37%, 1);
+$color2: hsla(202%, 46%, 72%, 1);
+$color3: hsla(182%, 82%, 93%, 1);
+$color4: hsla(12%, 83%, 62%, 1);
+$color5: hsla(218%, 23%, 21%, 1);
+
+/* RGB */
+$color1: #43424c;
+$color2: #343241;
+$color3: #2d2c3f;
+$color4: rgb(38, 39, 48);
+
+$green1: #4deeb7;
+$green2:    #31b87e;
+$green3: #0f4f4d;
+
+$yellow1: #f9dc76;
+$yellow2: #ffddb0;
+
+$red1: rgba(238, 108, 77, 1);
+$red2: #ed5507;
+
+$gray:#f5f5f5;
+$light-greay: hsla(360, 0%, 78%, 1);
+
+
+/*CUSTOM*/
+$border:1px solid $light-greay;
+$input-size: 50px;
+$numer-font-clor: #6e8eb7;
+$room-size:48px;
+$switcher-size:$room-size/5;
+$light-greay: hsla(360, 0%, 68%, 1);
+$color4: rgba(238, 108, 77, 1);
