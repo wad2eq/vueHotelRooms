@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <!-- <div class="el">To ejst rum</div>
-    <div class="close" @click="close(val)">x</div> -->
+  <div class="flex-container">
     <div :key="i" v-for="(room, i) in getRooms" class="room card">
-      <input :value="room" class="room--number"/>
+      <input :value="room" :class="inputClasses" />
       <span class="room--switcher" @click="removeRoom(room)"></span>
     </div>
-    <span class="add-room"><input type="text" v-model="newRoom" @keyup="addRoom()"></span>
+    <div class="room card">
+      <input type="text" v-model="addRoomValue" class="inputClasses" @keyup="updateRoom">
+    </div>
   </div>
 </template>
 
@@ -17,12 +17,40 @@ export default {
   data() {
     return {
       show: true,
-      rooms:null
+      rooms:null,
+      addRoomValue:'',
+      //TODO setup classes more generic -> do vuexa ???
+      inputClasses:['border-light','room--number'],
+      errMessage:''
     };
   },
   methods: {
-    close(val) {
-      this.$emit("rebuild-list", val);
+    updateRoom(){
+      if(this.checkUpdatedRoomValue()){
+        this.$store.commit({
+          type:'addRoomToFloor',
+          index: this.floorId,
+          value: parseInt(this.addRoomValue.slice(0,3))
+        })
+        this.addRoomValue = '';
+      }
+    },
+    removeRoom(roomNumber){
+      console.log(roomNumber);
+      this.$store.commit({
+        type: 'removeRoomToFloor',
+        index: this.floorId,
+        roomNumber: roomNumber
+      })
+    },
+    checkUpdatedRoomValue(){
+      if(this.addRoomValue.length === 4 && this.addRoomValue.indexOf(',', 3) != -1){
+        console.log('er');
+        return true;
+      }else{
+        this.errMessage = 'UPS nie pozwalam';
+        return false;
+      }
     }
   },
   computed:{
@@ -76,6 +104,9 @@ export default {
           position: absolute;
           top:0;
           margin: auto;
+          width: 10px;
+          height: 2px;
+          background-color:red;
         }
         &:after{
           transform: rotate(45deg);

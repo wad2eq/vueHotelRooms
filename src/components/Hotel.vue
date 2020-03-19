@@ -69,9 +69,9 @@ export default {
       this.$store.commit({
         type: "createFloorFilter",
         index: this.florIndex++,
-        floor: this.floor,
-        from: this.from,
-        to: this.to
+        floor: parseInt(this.floor) -1 ,
+        from: parseInt(this.from),
+        to: parseInt(this.to)
       });
     },
     validate() {
@@ -80,8 +80,10 @@ export default {
       this.createFloor();
     },
     checking(value,rangeValue) {
-      let reg = rangeValue === 'floor' ? /^\d{1}$/ : /^\d{3}$/;
+      // regular expresion depends on lenth room number
+      let reg = rangeValue === 'floor' ? /^\d{1}$/ : /^\d{1,2}$/;
       if (reg.test(parseInt(value))) {
+        console.log("valid");
         this.notValidInput = false;
         return true;
       } else {
