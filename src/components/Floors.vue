@@ -1,7 +1,8 @@
 <template>
   <div class="box-container">
-    <h2 class="title text-center">Floor</h2>
-    <Rooms :floorId="floorId"/>
+    <span class="remove-block" @click="removeFloor()"></span>
+    <h2 class="title text-center">{{}}</h2>
+    <Rooms :floorId="florIdprop"/>
   </div>
 </template>
 
@@ -12,17 +13,22 @@ export default {
   name: "Floors",
   props: ["floorId"],
   components: {
-    Rooms
+    Rooms,
   },
   data() {
-    return {};
+    return {
+      florIdprop: this.floorId,
+    };
   },
   methods: {
-  },
-  computed: {
-    floors() {
-      return this.$store.getters.getFloors[this.floorId];
-    }
+    //TODO change for action
+    removeFloor(){
+      console.log(this.florIdprop);
+      this.$store.commit({
+        type: 'removeFloor',
+        floorId: this.floorId,
+      })
+    },
   }
 };
 </script>

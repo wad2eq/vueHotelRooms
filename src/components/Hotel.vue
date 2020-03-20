@@ -1,7 +1,8 @@
 <template>
   <div class="container main">
+    {{floors}} asd
     <form>
-      {{ errorMessage }}
+      <div class="errorMessage" v-show="notValidInput"> {{ errorMessage }} </div>
       <fieldset class="flors  flex-container flex-center box-container">
         <label>Wybież pientro</label>
         <input
@@ -19,6 +20,7 @@
           type="text"
           :disabled="onInput"
           v-model="from"
+          placeholder="nr"
           @keyup="checking(from, 'from')"
         />
         <label>to</label>
@@ -27,6 +29,7 @@
           type="text"
           :disabled="onInput"
           v-model="to"
+          placeholder="nr"
           @keyup="checking(to, 'to')"
         />
         <button @click.prevent="enableInputs()" class="flors--edit-range">
@@ -52,9 +55,9 @@ export default {
   },
   data() {
     return {
-      floor: "nr",
-      from: "nr",
-      to: "nr",
+      floor: "",
+      from: "",
+      to: "",
       onInput: true,
       isActive: true,
       notValidInput: false,
@@ -70,26 +73,35 @@ export default {
       this.errorMessage='';
       this.$store.commit({
         type: "createFloorFilter",
-        index: this.florIndex++,
+        index: this.florIndex,
         floor: parseInt(this.floor) -1 ,
         from: parseInt(this.from),
         to: parseInt(this.to)
       });
+      this.florIndex++;
     },
     validate() {
        //TODO bardziej generalnie zrobić validacje -> lepiej :)
+      if(this.floor === ''){
+        this.notValidInput = true;
+        this.errorMessage = " Podałeś nie prawidłowe dane";
+        return;
+      }
       //  this.checking() ? this.createFloor() : this.errorMessage="Nie odałeś wartości" ;
       this.createFloor();
     },
-    checking(value,rangeValue) {
+    checking(value,rangeType) {
+      console.log("wa");
       // regular expresion depends on lenth room number
-      let reg = rangeValue === 'floor' ? /^\d{1}$/ : /^\d{1,2}$/;
+      let reg = rangeType === 'floor' ? /^\d{1}$/ : /^\d{1,2}$/;
       if (reg.test(parseInt(value))) {
-        console.log("valid");
         this.notValidInput = false;
+        this.errorMessage = '';
         return true;
       } else {
         this.notValidInput = true;
+        this.errorMessage = " Podałeś nie prawidłowe dane"
+        this[rangeType] = '';
         return false;
       }
     }

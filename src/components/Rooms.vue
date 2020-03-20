@@ -2,7 +2,7 @@
   <div class="flex-container flex-center padding">
     <div :key="i" v-for="(room, i) in getRooms" class="room card">
       <input :value="room" :class="inputClasses" />
-      <span class="room--switcher" @click="removeRoom(room)"></span>
+      <span class="remove-block" @click="removeRoom(room)"></span>
     </div>
     <div class="room card">
       <input type="text" v-model="addRoomValue" :class="inputClasses" @keyup="updateRoom">
@@ -26,11 +26,12 @@ export default {
   },
   methods: {
     updateRoom(){
-      if(this.checkUpdatedRoomValue()){
+      let roomNumber = parseInt(this.addRoomValue.slice(0,3));
+      if(this.checkUpdatedRoomValue(roomNumber, this.isExists)){
         this.$store.commit({
           type:'addRoomToFloor',
           index: this.floorId,
-          value: parseInt(this.addRoomValue.slice(0,3))
+          value: roomNumber
         })
         this.addRoomValue = '';
       }
@@ -38,25 +39,37 @@ export default {
     removeRoom(roomNumber){
       console.log(roomNumber);
       this.$store.commit({
-        type: 'removeRoomToFloor',
-        index: this.floorId,
+        type: 'removeRoomFloor',
+        floorId: this.floorId,
         roomNumber: roomNumber
       })
     },
-    checkUpdatedRoomValue(){
+    checkUpdatedRoomValue(roomNumber, fun){
       if(this.addRoomValue.length === 4 && this.addRoomValue.indexOf(',', 3) != -1){
-        console.log('er');
+        if(fun(roomNumber)){
+          return false;
+        }
         return true;
       }else{
         this.errMessage = 'UPS nie pozwalam';
         return false;
       }
+    },
+    isExists(){
+      return this.getRooms.includes(this.addRoomValue)
     }
-  },
+  },//methods
   computed:{
       getRooms(){
-          // console.log(this.$store.getters.getTodoById(this.floorId));
-          return this.$store.getters.getFloors[this.floorId]['rooms'];
+        let id = this.floorId;
+        const getFloor = this.$store.getters.getFloors.filter(function(x){
+          return x._id === id;
+        });
+        console.log(getFloor);
+        return getFloor[0]['rooms'];
+      },
+      getFlorIndex(){
+        return this.$store.getters.getFloorIndexing;
       }
   }
 };
@@ -81,41 +94,6 @@ export default {
         font-weight: bold;
         border:none;
         text-align: center;
-      }
-      &--switcher{
-        display: block;
-        position: absolute;
-        color:$light-greay;
-        right: $switcher-size/2;
-        top: $switcher-size/2;
-        height: $switcher-size;
-        width: $switcher-size;
-        padding:$switcher-size/2;
-        box-sizing: border-box;
-        &:hover{
-          color:$color4;
-          cursor: pointer;
-          &:after, &:before{
-            background-color:$red2;
-          }
-        }
-        &:after, &:before{
-          position: absolute;
-          content: '';
-          display: block;
-          width: $switcher-size;
-          height: 2px;
-          margin: auto;
-          left:0;
-          margin: 0;
-          background-color:$red1;
-        }
-        &:after{
-          transform: rotate(45deg);
-        }
-        &:before{
-          transform: rotate(-45deg);
-        }
       }
     }
 </style>

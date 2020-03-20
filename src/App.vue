@@ -56,12 +56,19 @@ img{
   width:25px;
   height: 25px;
 }
+.errorMessage{
+  color: $red3;
+  text-align: center;
+  font-family: $big-header;
+  font-size: 17px;
+}
 .box-container{
   padding: $input-size/2;
   margin:$input-size/2;
   box-shadow:0 1px 1px 0 rgba(38,39,48,.5),0 1px 3px 1px rgba(38, 39, 48, .9);
   transition:box-shadow 135ms cubic-bezier(.4,0,.2,1),width 235ms cubic-bezier(.4,0,.2,1);
   background: $color2;
+  position: relative;
   color:#fff;
 }
 .box-container:hover{
@@ -118,4 +125,39 @@ img{
 .card:hover {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
+.remove-block{
+  display: block;
+  position: absolute;
+  color:$light-greay;
+  right: $switcher-size/2;
+  top: $switcher-size/2;
+  height: $switcher-size;
+  width: $switcher-size;
+  padding:$switcher-size/2;
+  box-sizing: border-box;
+  &:hover{
+    color:$color4;
+    cursor: pointer;
+    &:after, &:before{
+      background-color:$red2;
+    }
+  }
+  &:after, &:before{
+    position: absolute;
+    content: '';
+    display: block;
+    width: $switcher-size;
+    height: 2px;
+    margin: auto;
+    left:0;
+    margin: 0;
+    background-color:$red1;
+  }
+  &:after{
+    transform: rotate(45deg);
+  }
+  &:before{
+    transform: rotate(-45deg);
+  }
+      }
 </style>
