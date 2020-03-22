@@ -5,7 +5,7 @@
       <span class="remove-block" @click="removeRoom(room)"></span>
     </div>
     <div class="room card">
-      <input type="text" v-model="addRoomValue" :class="inputClasses" @keyup="updateRoom">
+      <input type="text" v-model="addRoomValue" :class="inputClasses" @keyup="addRooom">
     </div>
   </div>
 </template>
@@ -25,24 +25,29 @@ export default {
     };
   },
   methods: {
-    updateRoom(){
+    addRooom(){
       let roomNumber = parseInt(this.addRoomValue.slice(0,3));
       if(this.checkUpdatedRoomValue(roomNumber, this.isExists)){
+      this.filterFloor();
         this.$store.commit({
           type:'addRoomToFloor',
-          index: this.floorId,
-          value: roomNumber
+          roomNumber: roomNumber
         })
         this.addRoomValue = '';
       }
     },
     removeRoom(roomNumber){
-      console.log(roomNumber);
+      this.filterFloor();
       this.$store.commit({
         type: 'removeRoomFloor',
-        floorId: this.floorId,
         roomNumber: roomNumber
       })
+    },
+    filterFloor(){
+      this.$store.commit({
+          type:'filterFloor',
+          floorId: this.floorId,
+        })
     },
     checkUpdatedRoomValue(roomNumber, fun){
       if(this.addRoomValue.length === 4 && this.addRoomValue.indexOf(',', 3) != -1){
@@ -68,9 +73,6 @@ export default {
         console.log(getFloor);
         return getFloor[0]['rooms'];
       },
-      getFlorIndex(){
-        return this.$store.getters.getFloorIndexing;
-      }
   }
 };
 </script>

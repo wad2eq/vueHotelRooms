@@ -2,7 +2,7 @@
   <div class="box-container">
     <span class="remove-block" @click="removeFloor()"></span>
     <h2 class="title text-center">{{}}</h2>
-    <Rooms :floorId="florIdprop"/>
+    <Rooms :floorId="florIdprop" v-show="validRoomRangeEntry"/>
   </div>
 </template>
 
@@ -18,6 +18,7 @@ export default {
   data() {
     return {
       florIdprop: this.floorId,
+      validRoomRangeEntry: true
     };
   },
   methods: {
@@ -29,6 +30,11 @@ export default {
         floorId: this.floorId,
       })
     },
+  },
+  computed:{
+    getRoomRange(){
+      return true;
+    }
   }
 };
 </script>
