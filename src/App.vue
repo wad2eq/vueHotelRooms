@@ -19,6 +19,25 @@ export default {
 * {
   box-sizing: border-box;
 }
+.text{
+  font-family: $font;
+  color:$yellow2;
+  @media screen and (min-width:800px){
+    max-width: 70%;
+    margin:0 auto;
+    .note{
+      padding: 0 $input-size;
+    }
+  }
+}
+.note{
+  display: flex;
+  color:$gray;
+  font-weight: 300;
+  font-size: .9em;
+  font-style: italic;
+
+}
 .title{
   font-family: $header;
   color: $gray;
@@ -34,7 +53,8 @@ export default {
   }
 
 }
-h2{
+h2, h3{
+  font-weight: 400;
   font-family: $header;
 }
 body{
@@ -46,11 +66,13 @@ img{
   max-width: 100%;
   height: auto;
 }
-.svg-color{
+.svg-ikon{
+  width:30px;
+  height: 30px;
+}
+.svg-color-yellow{
   fill:$yellow2;
   // stroke:$yellow2;
-  width:25px;
-  height: 25px;
 }
 .errorMessage{
   color: $red3;
@@ -79,7 +101,10 @@ img{
   margin:0 auto;
 }
 .padding{
-  padding:1em 3em 3em ;
+  padding:.5em ;
+  @media screen and(min-width:800px){
+    padding:1em 3em 3em ;
+  }
 }
 .flex-container {
   display: flex;
