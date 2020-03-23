@@ -22,7 +22,7 @@ export default new Vuex.Store({
           {
             _id: 1,
             range: [151, 200],
-            nRooms: Array.from({ length: 51 }, (v, i) => i + 151)
+            nRooms: Array.from({ length: 51 }, (v, i) => i + 150)
           },
           {
             _id: 2,
@@ -31,13 +31,13 @@ export default new Vuex.Store({
           },
           {
             _id: 3,
-            range: [201, 250],
-            nRooms: Array.from({ length: 51 }, (v, i) => i + 250)
+            range: [301, 350],
+            nRooms: Array.from({ length: 51 }, (v, i) => i + 350)
           },
           {
             _id: 4,
-            range: [201, 250],
-            nRooms: Array.from({ length: 51 }, (v, i) => i + 250)
+            range: [401, 450],
+            nRooms: Array.from({ length: 51 }, (v, i) => i + 450)
           }
         ] // end floors array
       }
@@ -50,22 +50,23 @@ export default new Vuex.Store({
      */
     getFloors(state) {
       return state.floorFilter;
-    }
-    // getRangeOfRooms(state){
-    //   return state.floorFilter[];
-    // }
+    },
+    //Range Of Rooms last floor
+    getRangeOfRooms(state){
+      return state.floorFilter[state.floorIndexToMutate]['range'];
+    },
   },
   mutations: {
     createFloor(state, payLoad) {
       //Take rooms from flor
       const sheratornFlors = state.hotels.sheraton.floors[payLoad.floor];
-      const rooms = sheratornFlors.nRooms.slice(payLoad.from, payLoad.to);
+      const rooms = sheratornFlors.nRooms.slice(payLoad.from, payLoad.to + 1);
       //Create filtered floor
-      console.log(state.floorIndex);
       state.floorFilter.push({
-        _id: state.floorIndex++,
+        _id: payLoad.index,
         floorNumber: payLoad.floor,
-        range: sheratornFlors.range[1] - sheratornFlors.range[0],
+        numberRange: sheratornFlors.range,
+        range: (sheratornFlors.range[1] - sheratornFlors.range[0]),
         rooms
       });
     },
@@ -85,12 +86,12 @@ export default new Vuex.Store({
     },
     //Filter floor to mutate when adding room
     filterFloor(state, payLoad) {
+      console.log("find index of " + payLoad.floorId);
       state.floorIndexToMutate = state.floorFilter.findIndex(function (x) {
         return x._id === payLoad.floorId;
       });
     },
     removeFloor(state, payLoad) {
-      state.floorIndex = state.floorIndex--;
       state.floorFilter =  state.floorFilter.filter(x => x._id !== payLoad.floorId);
     },
   },

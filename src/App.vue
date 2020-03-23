@@ -12,10 +12,6 @@ export default {
   name: 'App',
   components:{
     Hotel,
-  },
-  data(){
-    return{
-    }
   }
 }
 </script>

@@ -1,6 +1,5 @@
 <template>
   <div class="container main">
-    {{floors}} asd
     <form>
       <div class="errorMessage" v-show="notValidInput"> {{ errorMessage }} </div>
       <fieldset class="flors  flex-container flex-center box-container">
@@ -39,7 +38,7 @@
       <div class="flex-center flex-container">
         <button @click.prevent="validate()" class="btn">Add flor</button>
       </div>  
-      <Floors :key="fl._id" v-for="fl in floors" :floorId="fl._id"  />
+      <Floors :key="fl._id" v-for="fl in floors" :floorId="fl._id" :to="to"  />
     </form>
   </div>
 </template>
@@ -73,6 +72,7 @@ export default {
       this.errorMessage='';
       this.$store.commit({
         type: "createFloor",
+        index: this.florIndex,
         floor: parseInt(this.floor) -1 ,
         from: parseInt(this.from),
         to: parseInt(this.to)
